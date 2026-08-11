@@ -5,6 +5,10 @@ import PackageDescription
 
 let package = Package(
     name: "POSiOS",
+    platforms: [
+        .macOS(.v13),
+        .iOS(.v16),
+    ],
     products: [
         .executable(name: "POSiOS", targets: ["POSiOS"])
     ],
