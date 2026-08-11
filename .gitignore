@@ -1,0 +1,20 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Swift / SwiftPM
+.build/
+.swiftpm/
+DerivedData/
+
+# Xcode
+xcuserdata/
+*.xcodeproj
+*.xcworkspace
+*.xcodeproj/*
+*.xcworkspace/*
+
+# Tooling
+.netrc
+.env
+.env.*
