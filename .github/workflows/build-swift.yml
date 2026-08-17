@@ -1,0 +1,31 @@
+name: Build iOS (Swift Package)
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Swift Package
+        run: |
+          swift build
+
+      - name: Run Tests
+        run: |
+          swift test
+
+      - name: Archive Build Artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r .build/debug/POSiOS artifacts/ || tar -czf artifacts.tar.gz .build/ || echo "Build complete"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: artifacts/
+          compression-level: 0
