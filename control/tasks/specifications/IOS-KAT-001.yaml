@@ -1,0 +1,61 @@
+# IOS-KAT-001 — Task Contract: SwiftUI Katalog List
+
+schema_version: "1.0"
+
+task:
+  id: IOS-KAT-001
+  title: "Tampilan daftar katalog produk di SwiftUI iOS"
+  type: frontend-implementation
+  project: pos-katalog
+  status: technical-ready
+  requirement_ids:
+    - REQ-POS-KAT-005
+    - REQ-POS-KAT-006
+  business_rule_ids:
+    - BL-IOS-KAT-001
+  contract_ids:
+    - CONTRACT-KAT-001
+
+ownership:
+  role: ios-developer
+  repository: POS-ios
+  base_branch: develop
+  branch: agent/IOS-KAT-001-swiftui-katalog-list
+
+execution:
+  isolation: worktree
+  background: true
+  max_turns: 100
+  timeout_minutes: 60
+
+paths:
+  allowed:
+    - .github/workflows/**
+    - Sources/POSiOS/**
+    - Package.swift
+  forbidden:
+    - .claude/**
+    - .task/**
+
+inputs:
+  - control/tasks/specifications/CONTRACT-KAT-001.yaml
+
+acceptance_criteria:
+  - "List menampilkan produk dengan foto, nama, harga jual, stok"
+  - "Empty state saat tidak ada produk"
+  - "Pull-to-refresh untuk refresh data"
+  - "Tap item membuka detail produk"
+  - "Unit test: List renders, empty state, refresh"
+
+quality_gates:
+  - swift build
+  - swift test
+
+outputs:
+  - code
+  - unit-tests
+  - pull-request
+
+stop_conditions:
+  - contract change required
+  - dependency required
